@@ -1,7 +1,11 @@
 #!/bin/bash
 
-
-mkdir ~/.env/backup
+#---------------------------------backup--------------------------------
+if [ -f "~/.env/backup" ]
+then 
+	mkdir ~/.env/backup
+fi
+#-----------------------------fin backup--------------------------------
 #---------------------------------bashrc--------------------------------
 if [ -f "~/.bashrc" ]
 then
@@ -14,5 +18,20 @@ else
 	ln -s ~/.env/files/.bashrc ~/.bashrc
 fi
 #-----------------------------fin bashrc--------------------------------
+#---------------------------------profile-------------------------------
+if [ -f "~/.profile" ]
+then
+        echo "copie du fichier profile dans backup ..."
+        cp ~/.profile ~/.env/backup/
+        echo "linking du profile ..."
+        ln -s ~/.env/files/.profile ~/.profile
+else
+        echo "linking du profile ..."
+        ln -s ~/.env/files/.profile ~/.profile
+fi
+#-----------------------------fin profile-------------------------------
+
 
 exit
+exit
+
