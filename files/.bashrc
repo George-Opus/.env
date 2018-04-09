@@ -124,9 +124,9 @@ if [ -x /usr/bin/mint-fortune ]; then
      /usr/bin/mint-fortune
 fi
 
-$lieu=$(pwd)
-export PATH="$lieu/bin:$PATH"
-export LD_LIBRARY_PATH="$lieu/lib:$LD_LIBRARY_PATH"
+
+export PATH="~/.env/bin:$PATH"
+export LD_LIBRARY_PATH="~/.env/lib:$LD_LIBRARY_PATH"
 export EDITOR="vim"
 export VISUAL="vim"
 export PS1="new $PS1"
