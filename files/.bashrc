@@ -124,7 +124,7 @@ if [ -x /usr/bin/mint-fortune ]; then
      /usr/bin/mint-fortune
 fi
 
-
+alias remove="bash .env/remove.sh"
 export PATH="~/.env/bin:$PATH"
 export LD_LIBRARY_PATH="~/.env/lib:$LD_LIBRARY_PATH"
 export EDITOR="vim"
