@@ -126,7 +126,7 @@ fi
 
 $lieu=$(pwd)
 export PATH="$lieu/bin:$PATH"
-export  LD_LIBRARY_PATH="$lieu/lib:$LD_LIBRARY_PATH"
+export LD_LIBRARY_PATH="$lieu/lib:$LD_LIBRARY_PATH"
 export EDITOR="vim"
 export VISUAL="vim"
 export PS1="new $PS1"
