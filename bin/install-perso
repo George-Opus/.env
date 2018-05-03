@@ -1,0 +1,33 @@
+#!/bin/bash
+
+if [ "$1" != "" ]
+then
+	ftp=$(wget -O - https://packages.debian.org/stretch/amd64/$1/download -O - -o /dev/null| grep ftp.fr.debian.org/debian | cut -d'"' -f2)
+	wget $ftp
+	ar x $1*.deb
+	rm control.tar.gz
+	rm debian-binary
+	rm $1*.deb
+	tar -xf data.tar.xz
+	test=$(tar -tf data.tar.xz | grep "bin/$1")
+	test=$(echo $test |cut -d" " -f1)
+	if [ "$test" != "" ]
+	then
+		echo "test = $test/"
+		rm data.tar.xz
+		cp $test ~/.env/bin/
+		rm -r usr
+	else
+		test=$(tar -tf data.tar.xz | grep "games/$1")
+		test=$(echo $test |cut -d" " -f1)
+       	 	if [ "$test" != "" ]
+		then
+			echo test2 = $test
+                	rm data.tar.xz
+               	 	cp $test ~/.env/bin/$1
+                	rm -r usr
+		fi
+	fi
+else 
+	echo "rien"
+fi
