@@ -3,31 +3,23 @@
 if [ "$1" != "" ]
 then
 	ftp=$(wget -O - https://packages.debian.org/stretch/amd64/$1/download -O - -o /dev/null| grep ftp.fr.debian.org/debian | cut -d'"' -f2)
+	if [ "$ftp" == "" ]
+	then
+	ftp=$(wget -O - https://packages.debian.org/stretch/amd64/$1/download -O - -o /dev/null| grep security.debian.org/debian-security | cut -d'"' -f2)
+	fi
 	wget $ftp
 	ar x $1*.deb
 	rm control.tar.gz
 	rm debian-binary
+	rm debian-security
 	rm $1*.deb
 	tar -xf data.tar.xz
-	test=$(tar -tf data.tar.xz | grep "bin/$1")
-	test=$(echo $test |cut -d" " -f1)
-	if [ "$test" != "" ]
-	then
-		echo "test = $test/"
-		rm data.tar.xz
-		cp $test ~/.env/bin/
-		rm -r usr
-	else
-		test=$(tar -tf data.tar.xz | grep "games/$1")
-		test=$(echo $test |cut -d" " -f1)
-       	 	if [ "$test" != "" ]
-		then
-			echo test2 = $test
-                	rm data.tar.xz
-               	 	cp $test ~/.env/bin/$1
-                	rm -r usr
-		fi
-	fi
+	rm data.tar.xz
+	cp usr/bin/* ~/.env/bin/
+	cp usr/games ~/.env/bin/
+	rm -r usr
+
 else 
 	echo "rien"
 fi
+#security.debian.org/debian-security
